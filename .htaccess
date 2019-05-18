@@ -1,0 +1,29 @@
+# Protect Sensitive Files
+# https://codex.wordpress.org/htaccess
+<FilesMatch "^.*(error_log|wp-config\.php|php.ini|\.[hH][tT][aApP].*)$">
+Order deny,allow
+Deny from all
+</FilesMatch>
+
+# Password Protect Login
+# https://codex.wordpress.org/htaccess
+<Files wp-login.php>
+AuthType Basic
+AuthName "Password Protected"
+AuthUserFile /full/path/to/.htpasswd
+Require valid-user
+Satisfy All
+</Files>
+
+
+# Block WordPress xmlrpc.php requests
+# https://wordpress.stackexchange.com/questions/219643/best-way-to-eliminate-xmlrpc-php
+<Files xmlrpc.php>
+order allow,deny
+deny from all
+</Files>
+
+
+# Disable directory browsing
+# https://www.wpexplorer.com/htaccess-wordpress-security/
+Options All -Indexes
